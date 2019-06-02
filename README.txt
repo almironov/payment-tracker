@@ -30,9 +30,9 @@ RMB 2000
 HKD 200
 
 Sample output:
-USD 900
-RMB 2000
-HKD 300
+USD=900
+RMB=2000
+HKD=300
 
 When your Java program is run, a filename optionally specified. For enter data from a file,
 enter 'file'. The format of the file will be one or more lines with Currency Code Amount 
@@ -47,6 +47,6 @@ continue to set payments.
 
 For each currency, the exchange rate is adjusted against the US dollar. When a withdrawal
 is displayed, an equivalent dollar amount is displayed next to it, for example:
-USD 900
-RMB 2000 (USD 314.60)
-HKD 300 (USD 38.62)
+USD=900
+RMB=2000 (USD 314.60)
+HKD=300 (USD 38.62)
