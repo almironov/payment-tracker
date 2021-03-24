@@ -1,15 +1,15 @@
 package cz.bsc.homework;
 
-import cz.bsc.homework.service.PaymentTrackerService;
-import cz.bsc.homework.timer.PaymentBalanceTimer;
+import cz.bsc.homework.service.PackageDeliveryService;
+import cz.bsc.homework.timer.PackageBalanceTimer;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        new PaymentBalanceTimer().timerPrintBalance();
-        new PaymentTrackerService().startPayment();
+        new PackageBalanceTimer().timerPrintBalance();
+        new PackageDeliveryService().startPayment();
 
     }
 }

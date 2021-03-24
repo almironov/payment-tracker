@@ -5,7 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cz.bsc.homework.constants.Constants;
-import cz.bsc.homework.storage.PaymentTrackerStorage;
+import cz.bsc.homework.storage.PackageDeliveryStorage;
 
 
 /**
@@ -14,9 +14,9 @@ import cz.bsc.homework.storage.PaymentTrackerStorage;
  * @author Alexander Mironov
  */
 
-public class PaymentBalanceTimer {
+public class PackageBalanceTimer {
 
-    private final PaymentTrackerStorage storage = PaymentTrackerStorage.getInstance();
+    private final PackageDeliveryStorage storage = PackageDeliveryStorage.getInstance();
 
     public void timerPrintBalance() {
         final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);

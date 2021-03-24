@@ -1,4 +1,4 @@
-Payment Tracker
+Package Delivery
 
 1. Install
 
@@ -7,46 +7,77 @@ Installed on the computer:
 - Maven 4.0
 
 Build:
-git clone https://github.com/almironov/payment-tracker.git
-cd payment-tracker
+git clone https://github.com/almironov/package-delivery.git
+cd package-delivery
 mvn package
 
 Run:
-java -jar payment-tracker-1.0-jar-with-dependencies.jar
+java -jar package-delivery-1.0-jar-with-dependencies.jar
+
+Run example:
+After run
+1 - enter 'fees' - The system will wait for the path to the file with fees.
+2 - enter 'fees.txt' - Data from the file with fees will be entered
+3 - enter 'file' - The system will wait for the path to the file with packages and postcode.
+4 - enter 'pkgGood.txt'
 
 2. Description of the program
 
-Program that keeps a record of payments. Each payment includes a currency and an amount.
-Data should be kept in memory.
+Package delivery
+Write a command line program that keeps a record of packages processed. Each package information consists of weight (in kg) and destination postal code. Think about these packages in the same way, when you send one using postal office. Data should be kept in memory (please don’t introduce any database engines).
 
-The program output a list of all the currency and amounts to the console once per minute.
-The input be typed into the command line, and optionally also be loaded from a file.
+The program should:
+-	read user input from console, user enters line consisting of weight of package and destination postal code
+-	once per minute - write output to console, each line consists of postal code and total weight of all packages for that postal code
+-	process user command “quit”, when user enters quit to command line as input, program should exit
+-	take and process command line argument specified at program run – filename of file containing lines in same format as user can enter in command line. This is considered as initial load of package information
+-	handle invalid input of user (it is up to you how, describe implemented behaviour in readme file)
 
 Sample input:
-USD 1000
-HKD 100
-USD -100
-RMB 2000
-HKD 200
+3.4 08801
+2 90005
+12.56 08801
+5.5 08079
+3.2 09300
+
+Input line format:
+<weight: positive number, >0, maximal 3 decimal places, . (dot) as decimal separator><space><postal code: fixed 5 digits>
+
+Sample output (order by total weight):
+08801 15.960
+08079 5.500
+09300 3.200
+90005 2.000
+
+Output line format:
+<postal code: fixed 5 digits><space><total weight: fixed 3 decimal places, . (dot) as decimal separator>
+
+
+Optional bonus task
+The program should:
+-	take and process another command line argument specified at program run – filename of file containing information about fees related to package weight. Once such file is specified as argument then output written to console will contain also total fee for packages sent to certain postal code, see format of file and out here after
+
+Format of file containing fees (sample):
+10 5.00
+5 2.50
+3 2.00
+2 1.50
+1 1.00
+0.5 0.70
+0.2 0.50
+
+Line format:
+<weight: positive number, >0, maximal 3 decimal places, . (dot) as decimal separator><space><fee: positive number, >=0, fixed two decimals, . (dot) as decimal separator>
+
+Meaning:
+delivery fee of package weighing more than or exactly 10 (kg) is 5.00 (Eur),
+delivery fee of package weighing more than or exactly 5 (kg) and less than 10 (kg) is 2.50 (Eur), etc.
 
 Sample output:
-USD=900
-RMB=2000
-HKD=300
+08801 15.960 7.00
+08079 5.500 2.50
+09300 3.200 2.00
+90005 2.000 1.50
 
-When your Java program is run, a filename optionally specified. For enter data from a file,
-enter 'file'. The format of the file will be one or more lines with Currency Code Amount 
-like in the Sample Input above, where the currency may be any uppercase 3 letter code, 
-such as USD, HKD, RMB, NZD, GBP etc. The user can then enter more lines into the console by
-typing a currency and amount and pressing enter. Once per minute, the output showing the 
-net amounts of each currency. If the net amount is 0, that currency is not displayed. When 
-the user types "quit", the program should exit.
-
-If the user enters invalid input, the program to display an error message and you can 
-continue to set payments.
-
-For each currency, the exchange rate is adjusted against the US dollar. When a withdrawal
-is displayed, an equivalent dollar amount is displayed next to it, for example:
-USD=900
-RMB=2000 (USD 314.60)
-HKD=300 (USD 38.62)
+Output line format:
+<postal code: fixed 5 digits><space><total weight: fixed 3 decimal places, . (dot) as decimal separator><space><total fee: fixed 2 decimal places, . (dot) as decimal separator)
